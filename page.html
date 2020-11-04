@@ -2,39 +2,47 @@
 <html>
   <head>
     <base target="_top">
+    <!-- CDN for Materialize CSS -->
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+     <!-- include page-css -->
+    <?!= include("page-css"); ?>
   </head>
   <body>
     
     <h1>Hello</h1>
-    <div>
-       <label>First Name : </label><input type="text" id="firstname">
+    <div class="form-row">
+       <label>First Name : </label><input type="text" id="firstName">
     </div>
-    <div>
-       <label>Last Name : </label><input type="text" id="lastname">
+    <div class="form-row">
+       <label>Last Name : </label><input type="text" id="lastName">
     </div>
     
-    <div>
-       <select>
+    <div class="form-row">
+       <label>Application:</label>
+       <select id="app">
           <option>Google Sheets</option>
           <option>Excel</option>
           <option>Number</option>
        </select>
     </div>
     
-    <button id="btn">Run It !</button>
+    <div class="form-row">
+       <button id="btn">Run It !</button>
+    </div>
     
-    <script>
-       document.getElementById("btn").addEventListener("click",doStuff);
-       
-       function doStuff(){
-       
-          var uname = document.getElementById("username").value;
-          
-          google.script.run.userClicked(uname);
-          // clear the value of username
-          document.getElementById("username").value = "";
-       }
-    </script>
+     <!-- include page-js -->
+    <?!= include("page-js"); ?>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    
   </body>
 </html>
 
