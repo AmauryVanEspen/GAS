@@ -6,7 +6,21 @@
   <body>
     
     <h1>Hello</h1>
+    Name : <input type="text" id="username">
+    <button id="btn">Run It !</button>
     
+    <script>
+       document.getElementById("btn").addEventListener("click",doStuff);
+       
+       function doStuff(){
+       
+          var uname = document.getElementById("username").value;
+          
+          google.script.run.userClicked(uname);
+          // clear the value of username
+          document.getElementById("username").value = "";
+       }
+    </script>
   </body>
 </html>
 
