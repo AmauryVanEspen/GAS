@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- CDN for Materialize CSS -->
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -60,7 +61,7 @@
        function onSuccess(data) {
 //       console.log(Object.entries(data).map(item => item[0] + ": " + item[1]).join("\n"));
          document.getElementById('callback').textContent = Object.entries(data).map(item => item[0] + ": " + item[1]).join("\n");
-}
+       }
        
        // #Old Code
        // animation du bouton plus-minus sur collapsile
@@ -93,8 +94,8 @@
                        content.style.display = "block";
                    }
 
-           });
-       }
+           })
+       };
 
        document.getElementById('peloton').onchange = function(e) {
            console.log(this.value, this.options[this.selectedIndex].text);

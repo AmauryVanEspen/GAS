@@ -1,7 +1,10 @@
 // Global variables
-var url = "https://docs.google.com/spreadsheets/d/1Ge_njRIV_YTVJnfgRQuVkOnvGtMiUQftHRcPSGuiD7A/edit#gid=0";
+
+// not used, replaced by sheetId
+// var url = "https://docs.google.com/spreadsheets/d/1Ge_njRIV_YTVJnfgRQuVkOnvGtMiUQftHRcPSGuiD7A/edit#gid=0";
 
 var sheetId = "1Ge_njRIV_YTVJnfgRQuVkOnvGtMiUQftHRcPSGuiD7A";
+
 // Initial function to generate a dynamic content with partials
 function doGet(e) {
   
@@ -14,7 +17,14 @@ function doGet(e) {
   
   // Get Arrays of arrays from Spreedsheet with all the values from the columns (Dictionnary Key-Value).
   var options = wsOptions.getDataRange().getValues();
-  var optionsHeaders = options[0];
+  
+  Logger.log(options);
+  // Log to understand the optionsHeaders and Values according to range get in options.
+  for (var i = 0; options.length; i++) {Logger.log(i, options[i])};
+  
+  // Get Header line only : Index 0 => first line of the sheetnameOptions
+  var optionsHeaders = options[0]; // First line of Sheet "Options" with Header
+  // Get items line only : starting @ Index 1 => lines of the sheetnameOptions
   var optionsValues = options.slice(1, options.length);
   
   // #Old Code
@@ -31,11 +41,12 @@ function doGet(e) {
   Logger.log(optionsValues.map(function(options){ return { "option": options[0], "id": options[1] } }));
   
   // Variables
+  // Get the items content by columns.
   // return single dimension array from spreadsheet
-  html.peloton = optionsValues.map(function(options){ return { "option": options[0], "id": options[1] } }); 
+  html.peloton = optionsValues.map(function(items){ return { "option": items[0], "id": items[1] } }); 
   //optionsValues.map(options => options[0]);
   //  html.pelotonid = optionsValues.map(options => options[1]);
-  html.groupe = optionsValues.map(function(options){ return { "option": options[2], "id": options[3] } }); 
+  html.groupe = optionsValues.map(function(items){ return { "option": items[2], "id": items[3] } }); 
   //optionsValues.map(options => options[2]);
   //  html.groupeid = optionsValues.map(options => options[3]);
    
@@ -46,7 +57,8 @@ function doGet(e) {
   //html.groupeid = groupeid.map(function(r){ return r[0]});;
   
   // create a Html Page from a project file
-  return html.evaluate().setTitle('GAS Form - spreadsheet');
+  // Let browser know website is optimized for mobile
+  return html.evaluate().addMetaTag("viewport", "width=device-width, initial-scale=1.0").setTitle('GAS Form - spreadsheet');
   
 }
 
