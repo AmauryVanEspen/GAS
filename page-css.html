@@ -1,5 +1,29 @@
-    <style>
-       .form-row {
-          margin-bottom:15px;
-       }
-    </style>
+<style>
+.form-row {
+    margin-bottom: 15px;
+}
+
+.collapsible {
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 48px;
+    margin-top: 5px;
+}
+
+.collapsible:after {
+    content: "\2212";
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.collapsible.active:after {
+    content: '\002B';
+}
+
+fieldset {
+    border: 1px solid rgba(51, 51, 51, 0.5);
+}
+</style>

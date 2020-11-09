@@ -1,19 +1,109 @@
-    <script>
-       document.getElementById("btn").addEventListener("click",doStuff);
+<!DOCTYPE html>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+       document.addEventListener('DOMContentLoaded', function() {
+         var elems = document.querySelectorAll('select');
+         var instances = M.FormSelect.init(elems);
+       });
+    
+       document.getElementById("btn-send").addEventListener("click",doStuff);
        
-       function doStuff(){
-          
-          // create an Object that contains properties
-          var userInfo = {};
-          // set properties according to id
-          userInfo.firstName = document.getElementById("firstName").value;
-          userInfo.lastName = document.getElementById("lastName").value;
-          userInfo.app = document.getElementById("app").value;
-          
-          google.script.run.userClicked(userInfo);
-          // clear the values of variable
-          document.getElementById("firstName").value = "";
-          document.getElementById("lastName").value = "";
-          document.getElementById("app").value = "";
+       function doStuff() {
+           // create an Object that contains properties
+           var userInfo = {};
+           // set properties according to id
+           userInfo.firstName = document.getElementById("firstName").value;
+           userInfo.lastName = document.getElementById("lastName").value;
+           userInfo.peloton = document.getElementById("peloton").value;
+           userInfo.groupe = document.getElementById("groupe").value;
+           userInfo.nid = document.getElementById("nid").value;
+           userInfo.birthDay = document.getElementById("birthDay").value;
+    
+           console.log(userInfo);
+
+           google.script.run
+           .withSuccessHandler(onSuccess)
+           .userClicked(userInfo);
+           // clear the values of variable
+           document.getElementById("form_01").reset();
+           document.getElementById("form_02").reset();
+       };
+       
+//       function doStuff(){
+//          
+//          // create an Object that contains properties
+//          var userInfo = {};
+//          // set properties according to id
+//          userInfo.firstName = document.getElementById("firstName").value;
+//          userInfo.lastName = document.getElementById("lastName").value;
+//          userInfo.peloton = document.getElementById("peloton").value;
+//          userInfo.groupe = document.getElementById("groupe").value;
+//          userInfo.nid = document.getElementById("nid").value;
+//          userInfo.birthDay = document.getElementById("birthDay").value;
+//          
+//          google.script.run.userClicked(userInfo);
+//          // clear the values of variable
+//          document.getElementById("firstName").value = "";
+//          document.getElementById("lastName").value = "";
+//          document.getElementById("birthDay").value = "";
+//          document.getElementById("nid").value = "";
+//          var myPeloton = document.getElementById("peloton");
+//          myPeloton.selectedIndex = 0;
+//          M.FormSelect.init(myPeloton);
+//          var myGroupe = document.getElementById("groupe");
+//          myGroupe.selectedIndex = 0;
+//          M.FormSelect.init(myGroupe);
+//       };
+       
+       function onSuccess(data) {
+//       console.log(Object.entries(data).map(item => item[0] + ": " + item[1]).join("\n"));
+         document.getElementById('callback').textContent = Object.entries(data).map(item => item[0] + ": " + item[1]).join("\n");
+}
+       
+       // #Old Code
+       // animation du bouton plus-minus sur collapsile
+       // #Help
+//       var coll = document.getElementsByClassName("collapsible");
+//       
+//       for (var i = 0; i < coll.length; i++) {
+//         coll[i].addEventListener("click", function() {
+//           this.classList.toggle("active");
+//           var content = this.nextElementSibling;
+//           if (content.style.maxHeight){
+//             content.style.maxHeight = null;
+//           } else {
+//             content.style.maxHeight = content.scrollHeight + "px";
+//           } 
+//           });
+//         }
+         
+       // animation du bouton plus-minus sur collapsile
+       // #Help
+       var coll = document.getElementsByClassName("collapsible");
+       for (var i = 0; i < coll.length; i++) {
+           coll[i].addEventListener("click", function() {
+               this.classList.toggle("active");
+               var content = (this.nextElementSibling) ? this.nextElementSibling : document.getElementById('formDiv-container');
+               console.log(content.offsetHeight);
+                   if (content.offsetHeight > 0) {
+                       content.style.display = "none";
+                   } else {
+                       content.style.display = "block";
+                   }
+
+           });
        }
+
+       document.getElementById('peloton').onchange = function(e) {
+           console.log(this.value, this.options[this.selectedIndex].text);
+           document.getElementById('peloton_id').textContent = this.value ? "id:" + this.value : "";
+       }
+
+       document.getElementById('groupe').onchange = function(e) {
+           console.log(this.value, this.options[this.selectedIndex].text);
+           document.getElementById('group_id').textContent = this.value ? "id:" + this.value : "";
+       }  
+         
     </script>
