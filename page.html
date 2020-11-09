@@ -11,14 +11,16 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <!-- Compiled and minified JavaScript -->
+    <!-- #Help pourquoi le passer dans page-js ?-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
        
      <!-- include page-css -->
     <?!= include("page-css"); ?>
   </head>
+  
   <body>
-
     <div class="container">
+       <form id="form_01">
        <div class="row">
           <div class="input-field col s6">
              <input id="firstName" type="text" class="validate">
@@ -39,49 +41,47 @@
              <label for="nid">NID</label>
           </div>
        </div>
-    
-       <div class="container-fluid">
-          <!-- // #Help -->
-          <a class="collapsible" data-toggle="collapse" href="#formDiv-container" role="button" aria-expanded="false" aria-controls="formDiv-container"></a>
-       </div>
+       </form>
        <div class="container-fluid">
          <div class="loader-div">
             <div class="loader"></div>
          </div>
+         
          <div class="row">
-           <div id="formDiv-container" class="collapse in">
-             <div class="row">
-               <form>
-                <div class="input-field col s6">
-                <label>Peloton :</label>
-                   <select id="peloton">
-                     <option value="" disabled selected>Selectionnez votre Peloton</option>
-                     <? for(var i=0;i<peloton.length;i++){ ?>
-               
-                     <option value="<?= pelotonid[i]; ?>"><?= peloton[i]; ?></option>
-               
-                     <? } ?>
-                   </select>
-                </div>
+               <form id="form_02">
+               <fieldset>
+                    <legend align="right"><a class="collapsible"></a></legend>
+                    <div id="formDiv-container" style="height: 0.5em">
+                       <div class="input-field col s6">
+                       <label>Peloton :</label>
+                          <select id="peloton">
+                          <option value="" disabled selected>Selectionnez votre Peloton</option>
+                                <? for(var i=0;i<peloton.length;i++){ ?>
+                                <option value="<?= peloton[i].id; ?>">
+                                    <?= peloton[i].option; ?>
+                                </option>
+                                <? } ?>
+                          </select>
+                       </div>
                 <div class="input-field col s6">
                 <label>Groupe :</label>
                    <select id="groupe">
                      <option value="" disabled selected>Selectionnez votre Groupe</option>
-                     <? for(var i=0;i<groupe.length;i++){ ?>
-                
-                     <option value="<?= groupeid[i]; ?>"><?= groupe[i]; ?></option>
-                
-                     <? } ?>
-                   </select>
-                </div>
-               </form>
+                                <? for(var i=0;i<groupe.length;i++){ ?>
+                                <option value="<?= groupe[i].id; ?>">
+                                    <?= groupe[i].option; ?>
+                                </option>
+                                <? } ?>
+                    </select>
+                            <pre id="group_id"></pre>
+                        </div>
+                    </div>
+                    </fieldset>
+                </form>
+                <pre id="callback"></pre>
             </div>
-           </div>
-         </div>
-       </div>
-       
-       <button id="btn-send" class="waves-effect waves-light btn-small indigo darken-3"><i class="material-icons left">send</i>Envoyer</button>
-       
+        </div>
+        <button id="btn-send" class="waves-effect waves-light btn-small indigo darken-3"><i class="material-icons left">send</i>Envoyer</button>
     </div>
     
      <!-- include page-js -->
