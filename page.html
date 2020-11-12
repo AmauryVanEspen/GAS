@@ -21,6 +21,23 @@
        </div>
        <div class="row">
           <div class="input-field col s6">
+             <input id="email" type="text" class="validate">
+             <label for="email">E-Mail</label>
+          </div>
+          <div class="input-field col s6">
+             <label>Role :</label>
+                          <select id="role">
+                          <option value="" disabled selected>Role</option>
+                                <? for(var i=0;i<role.length;i++){ ?>
+                                <option value="<?= role[i].id; ?>">
+                                    <?= role[i].option; ?>
+                                </option>
+                                <? } ?>
+                          </select>
+          </div>
+       </div>
+       <div class="row">
+          <div class="input-field col s6">
              <input id="birthDay" type="text" class="validate">
              <label for="birthDay">Date de naissance</label>
           </div>
@@ -68,6 +85,57 @@
                 </form>
                 <pre id="callback"></pre>
             </div>
+            
+            <div class="row">
+               <form id="form_03">
+               <fieldset>
+                    <legend align="right"><a class="collapsible"></a></legend>
+                    <div id="formDiv-container" style="height: 0.5em">
+                       <div class="input-field col s4">
+                       <label>Activités :</label>
+                          <select id="activites">
+                          <option value="" disabled selected>Choix de l'activité</option>
+                                <? for(var i=0;i<activites.length;i++){ ?>
+                                <option value="<?= activite[i].id; ?>">
+                                    <?= activite[i].option; ?>
+                                </option>
+                                <? } ?>
+                          </select>
+                       </div>
+                       <div class="input-field col s4">
+                       <label>Status :</label>
+                          <select id="status">
+                            <option value="" disabled selected>Selectionnez votre status</option>
+                                <? for(var i=0;i<status.length;i++){ ?>
+                                <option value="<?= status[i].id; ?>">
+                                <?= status[i].option; ?>
+                                </option>
+                                <? } ?>
+                           </select>
+                           <!--pre id="status_id"></pre -->
+                        </div>
+                        <div class="input-field col s4">
+                        <input disabled id="confirmationstatus" type="text" class="validate">
+                        <label for="confirmationstatus">Status confirmé : </label>
+                        <!-- #Help, ajouter une condition pour l'affichage d'un input ou du select option fonction du rôle associé à l'email de la session courante -->
+                        <!-- ajouter une bouton de mise à jour uniquement pour le status et le status confirmé -->
+                        <!-- <label>Confirmation :</label>
+                          <select id="confirmationstatus">
+                            <option value="" disabled selected>Confirmation votre status</option>
+                                <--? for(var i=0;i<confirmationstatus.length;i++){ ?>
+                                <option value="<--?= confirmationstatus[i].id; ?>">
+                                <--?= confirmationstatus[i].option; ?>
+                                </option>
+                                <--? } ?>
+                           </select>
+                           <!--pre id="confirmationstatus_id"></pre -->
+                        </div>
+                    </div>
+                    </fieldset>
+                </form>
+                <pre id="callback"></pre>
+            </div>
+            
         </div>
         <button id="btn-send" class="waves-effect waves-light btn-small indigo darken-3"><i class="material-icons left">send</i>Envoyer</button>
     </div>

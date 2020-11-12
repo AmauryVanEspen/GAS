@@ -10,6 +10,7 @@
        });
     
        document.getElementById("btn-send").addEventListener("click",doStuff);
+       document.getElementById("activites").addEventListener("input",getActivities);
        
        function doStuff() {
            // create an Object that contains properties
@@ -17,10 +18,14 @@
            // set properties according to id
            userInfo.firstName = document.getElementById("firstName").value;
            userInfo.lastName = document.getElementById("lastName").value;
+           userInfo.email = document.getElementById("email").value;
            userInfo.peloton = document.getElementById("peloton").value;
            userInfo.groupe = document.getElementById("groupe").value;
+           userInfo.role = document.getElementById("role").value;
            userInfo.nid = document.getElementById("nid").value;
            userInfo.birthDay = document.getElementById("birthDay").value;
+           
+           M.updateTextFields();
     
            console.log(userInfo);
 
@@ -30,6 +35,7 @@
            // clear the values of variable
            document.getElementById("form_01").reset();
            document.getElementById("form_02").reset();
+           document.getElementById("form_03").reset();
        };
        
 //       function doStuff(){
@@ -97,14 +103,50 @@
            })
        };
 
+       document.getElementById('role').onchange = function(e) {
+           console.log(this.value, this.options[this.selectedIndex].text);
+           document.getElementById('role_id').textContent = this.value ? "id:" + this.value : "";
+       }; 
+       
        document.getElementById('peloton').onchange = function(e) {
            console.log(this.value, this.options[this.selectedIndex].text);
            document.getElementById('peloton_id').textContent = this.value ? "id:" + this.value : "";
-       }
+       };
 
        document.getElementById('groupe').onchange = function(e) {
            console.log(this.value, this.options[this.selectedIndex].text);
            document.getElementById('group_id').textContent = this.value ? "id:" + this.value : "";
-       }  
+       };  
+       
+       document.getElementById('activites').onchange = function(e) {
+           console.log(this.value, this.options[this.selectedIndex].text);
+           document.getElementById('activites_id').textContent = this.value ? "id:" + this.value : "";
+       }; 
+       
+       document.getElementById('status').onchange = function(e) {
+           console.log(this.value, this.options[this.selectedIndex].text);
+           document.getElementById('status_id').textContent = this.value ? "id:" + this.value : "";
+       };
+       
+       document.getElementById('confirmationstatus').onchange = function(e) {
+           console.log(this.value, this.options[this.selectedIndex].text);
+           document.getElementById('confirmationstatus_id').textContent = this.value ? "id:" + this.value : "";
+       };
+       
+       
+       function getActivities(nid){
+         var activites = {}; 
+         activites.id = document.getElementById("activites_id").value;
+         activites.name = document.getElementById("activites").value;
          
-    </script>
+         if(activites != ''){
+           google.script.run..withSuccessHandler(updateStatus).getActivitiesConfirmationStatus(activites, nid);
+           
+         };
+       };
+       
+       function updateStatus(confirmationstatus) {
+         document.getElementById('callback').textContent = Object.entries(confirmationstatus).map(item => item[0] + ": " + item[1] + ": " + item[3]).join("\n");
+         M.updateTextFields();
+       }
+</script>
